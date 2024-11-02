@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -179,17 +180,26 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private void adjustUIForRole() {
         if ("Recepcionista".equalsIgnoreCase(userRole)) {
             jLabel7.setText("Bienvenido Recepcionista");
-            jLabel_menuItem1.setVisible(false); // Dashboard
-            jLabel_menuItem2.setVisible(false); // Usuarios
-            jLabel_menuItem4.setVisible(false); // Ajustes
-            jLabel_menuItem5.setVisible(false); // Contactos
+            //jLabel_menuItem1.setVisible(false); // Dashboard
+            //jLabel_menuItem2.setVisible(false); // Pacientes
+            //jLabel_menuItem3.setVisible(false); //Citas
+            //jLabel_menuItem4.setVisible(false); // Productos
+            //jLabel_menuItem5.setVisible(false); // Ventas
+            //jLabel_menuItem6.setVisible(false); // Proveedores
+            jLabel_menuItem7.setVisible(false); // Reportes
+            jLabel_menuItem8.setVisible(false); // Usuarios
+            
         } else if ("Administrador".equalsIgnoreCase(userRole)) {
             jLabel7.setText("Bienvenido Administrador");
+            jLabel_menuItem7.setVisible(false); // Reportes
         } else if ("Optometrista".equalsIgnoreCase(userRole)) {
             jLabel7.setText("Bienvenido Optometrista");
-            jLabel_menuItem2.setVisible(false); // Usuarios
-            jLabel_menuItem4.setVisible(false); // Ajustes
-            jLabel_menuItem5.setVisible(false); // Contactos
+            //jLabel_menuItem2.setVisible(false); // Pacientes
+            jLabel_menuItem4.setVisible(false); // Producto
+            jLabel_menuItem5.setVisible(false); // Ventas
+            jLabel_menuItem6.setVisible(false); // Proveedores
+            jLabel_menuItem7.setVisible(false); // Reportes
+            jLabel_menuItem8.setVisible(false); // Usuarios
         }
     }
 
@@ -581,7 +591,11 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jButton_RHC = new javax.swing.JButton();
         jInternalFrame2 = new javax.swing.JInternalFrame();
         jLabel37 = new javax.swing.JLabel();
-        jButton_Imprimir = new javax.swing.JButton();
+        jButton_BusHistoria = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable_Historias = new javax.swing.JTable();
         jPanel_productos = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel_RGP = new javax.swing.JPanel();
@@ -620,6 +634,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jTable_buscarpro = new javax.swing.JTable();
         jPanel_GI = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
+        jButton_Gmostrar = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable_MostrarProductos = new javax.swing.JTable();
         jPanel_ventas = new javax.swing.JPanel();
         jTabbedPane7 = new javax.swing.JTabbedPane();
         jPanel_VE = new javax.swing.JPanel();
@@ -828,7 +845,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addComponent(jLabel_menuItem8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_menuItem9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addGap(0, 67, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
@@ -1483,7 +1500,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_pacientesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addContainerGap())
         );
 
         jPanel_citas.setBackground(new java.awt.Color(255, 255, 255));
@@ -2129,35 +2146,83 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("Sitka Text", 3, 18)); // NOI18N
         jLabel37.setText("Buscar Historias Clinicas");
 
-        jButton_Imprimir.setText("imprimir");
-        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+        jButton_BusHistoria.setText("Buscar Historia");
+        jButton_BusHistoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_ImprimirActionPerformed(evt);
+                jButton_BusHistoriaActionPerformed(evt);
             }
         });
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setText("Nombre del Paciente :");
+
+        jTable_Historias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Apellidos", "Direccion", "Correo", "Sexo", "Generar Historial"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jTable_Historias);
 
         javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
         jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
         jInternalFrame2Layout.setHorizontalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                        .addGap(296, 296, 296)
-                        .addComponent(jLabel37))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jButton_Imprimir)))
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_BusHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(425, 425, 425))
+            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7)
+                .addContainerGap())
+            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGap(315, 315, 315)
+                .addComponent(jLabel37)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel37)
-                .addGap(99, 99, 99)
-                .addComponent(jButton_Imprimir)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_BusHistoria)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31))
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("BUSCAR HISTORIA CLINICA", jInternalFrame2);
@@ -2454,6 +2519,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
             }
         });
 
+        jTable_buscarpro.setAutoCreateRowSorter(true);
         jTable_buscarpro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -2522,7 +2588,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(jButton_buscodigo1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane6.addTab("BUSQUEDA DE  PRODCUTOS", jPanel_BSCP);
@@ -2532,6 +2598,46 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jLabel29.setFont(new java.awt.Font("Sitka Text", 3, 18)); // NOI18N
         jLabel29.setText("GESTION DE INVENTARIO");
 
+        jButton_Gmostrar.setText("MOSTRAR");
+        jButton_Gmostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GmostrarActionPerformed(evt);
+            }
+        });
+
+        jTable_MostrarProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Codigo", "Nombre Producto", "Cantidad", "Marca", "Color Producto", "Fecha Registro", "Precio Compra", "Precio Venta"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(jTable_MostrarProductos);
+        jTable_MostrarProductos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable_MostrarProductos.getColumnModel().getColumnCount() > 0) {
+            jTable_MostrarProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable_MostrarProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable_MostrarProductos.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTable_MostrarProductos.getColumnModel().getColumn(3).setPreferredWidth(70);
+            jTable_MostrarProductos.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTable_MostrarProductos.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable_MostrarProductos.getColumnModel().getColumn(6).setPreferredWidth(120);
+            jTable_MostrarProductos.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jTable_MostrarProductos.getColumnModel().getColumn(8).setPreferredWidth(100);
+        }
+
         javax.swing.GroupLayout jPanel_GILayout = new javax.swing.GroupLayout(jPanel_GI);
         jPanel_GI.setLayout(jPanel_GILayout);
         jPanel_GILayout.setHorizontalGroup(
@@ -2540,13 +2646,26 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addContainerGap(332, Short.MAX_VALUE)
                 .addComponent(jLabel29)
                 .addGap(313, 313, 313))
+            .addGroup(jPanel_GILayout.createSequentialGroup()
+                .addGroup(jPanel_GILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_GILayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jButton_Gmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_GILayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_GILayout.setVerticalGroup(
             jPanel_GILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_GILayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel29)
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(jButton_Gmostrar)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         jTabbedPane6.addTab("GESTION DE INVENTARIO", jPanel_GI);
@@ -2562,10 +2681,10 @@ public class Dashboard_Form extends javax.swing.JFrame {
         );
         jPanel_productosLayout.setVerticalGroup(
             jPanel_productosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_productosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane6)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_productosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         jPanel_ventas.setBackground(new java.awt.Color(255, 255, 255));
@@ -2805,6 +2924,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
         );
 
         jTabbedPane8.addTab("REGISTRO DE PROVEEDORES", jPanel_RPRO);
+
+        jPanel_BCPROVE.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel43.setFont(new java.awt.Font("Sitka Text", 3, 18)); // NOI18N
         jLabel43.setText("BUSQUEDA DE PROVEEDORES ");
@@ -3184,7 +3305,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(jButton_eliminar1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane10.addTab("REGISTRO DE USUARIOS Y ASIGNAR ROL ", jPanel_RNUS);
@@ -3201,8 +3322,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jPanel_usuariosLayout.setVerticalGroup(
             jPanel_usuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_usuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -3280,7 +3401,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_containerLayout.createSequentialGroup()
                         .addComponent(jPanel_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))))
+                        .addGap(0, 2, Short.MAX_VALUE))))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
                     .addGap(0, 221, Short.MAX_VALUE)
@@ -3312,7 +3433,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(jPanel_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
-                    .addGap(0, 216, Short.MAX_VALUE)
+                    .addGap(0, 208, Short.MAX_VALUE)
                     .addComponent(jPanel_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel_containerLayout.setVerticalGroup(
@@ -3328,12 +3449,13 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(jPanel_citas, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
-                    .addGap(0, 92, Short.MAX_VALUE)
-                    .addComponent(jPanel_pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 99, Short.MAX_VALUE)
+                    .addComponent(jPanel_pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
-                    .addGap(0, 80, Short.MAX_VALUE)
-                    .addComponent(jPanel_productos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(89, Short.MAX_VALUE)
+                    .addComponent(jPanel_productos, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
                     .addGap(0, 78, Short.MAX_VALUE)
@@ -3348,12 +3470,12 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(jPanel_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
-                    .addContainerGap(110, Short.MAX_VALUE)
+                    .addContainerGap(91, Short.MAX_VALUE)
                     .addComponent(jPanel_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
             .addGroup(jPanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_containerLayout.createSequentialGroup()
-                    .addGap(0, 92, Short.MAX_VALUE)
+                    .addGap(0, 82, Short.MAX_VALUE)
                     .addComponent(jPanel_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -4166,9 +4288,61 @@ public class Dashboard_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_RCActionPerformed
 
-    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
-        
-    }//GEN-LAST:event_jButton_ImprimirActionPerformed
+    private void jButton_BusHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BusHistoriaActionPerformed
+           try (Connection conexion = conectarDB();
+            PreparedStatement stmt = conexion.prepareStatement(
+                "SELECT * FROM Pacientes WHERE nombre LIKE ?")) { // Busca por nombre
+
+            String nombrePaciente = jTextField1.getText(); 
+            stmt.setString(1, "%" + nombrePaciente + "%"); // Agrega '%' para buscar por subcadena
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                // Crea el modelo de datos para el JTable
+                DefaultTableModel modeloTabla = new DefaultTableModel();
+                modeloTabla.addColumn("ID");
+                modeloTabla.addColumn("Nombre");
+                modeloTabla.addColumn("Apellidos");
+                modeloTabla.addColumn("Dirección");
+                modeloTabla.addColumn("Correo");
+                modeloTabla.addColumn("Sexo");
+                modeloTabla.addColumn("Generar Historial"); // Agrega la columna para el botón
+
+                // Agrega los datos del paciente a la tabla
+                while (rs.next()) { // Usa while para agregar todas las filas
+                    modeloTabla.addRow(new Object[] {
+                        rs.getInt("id"), // Corregido: Ahora se usa "id"
+                        rs.getString("nombre"), // Reemplaza "nombre_paciente" por el nombre de la columna real
+                        rs.getString("apellido"), // Reemplaza "apellidos_paciente" por el nombre de la columna real
+                        rs.getString("direccion"), // Reemplaza "direccion_paciente" por el nombre de la columna real
+                        rs.getString("correo"), // Reemplaza "email_paciente" por el nombre de la columna real
+                        rs.getString("sexo"), // Reemplaza "sexo_paciente" por el nombre de la columna real
+                        new JButton("Generar Historial") // Crea un nuevo botón para cada fila
+                    });
+                }
+
+                // Asigna el modelo de datos a la tabla jTable_Historias
+                jTable_Historias.setModel(modeloTabla);
+
+            /*    // Agrega el botón "Generar Historial" a cada fila
+                for (int i = 0; i < jTable_Historias.getRowCount(); i++) {
+                    JButton generarHistorialButton = (JButton) jTable_Historias.getValueAt(i, 6); // Obtén el botón de la tabla
+                    generarHistorialButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            int idPaciente = (int) jTable_Historias.getValueAt(i, 0); // Obtén el ID del paciente de la fila actual
+                            generarHistorial(idPaciente); // Llama a la función para generar el historial
+                        }
+                    });
+                }
+
+                if (jTable_Historias.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(this, "No se encontró ningún historial para el nombre ingresado.", "Error", JOptionPane.ERROR_MESSAGE);
+                }*/
+            }
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Error al buscar el historial médico: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_jButton_BusHistoriaActionPerformed
 
     private void jButton_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_editActionPerformed
                                                      
@@ -4931,6 +5105,90 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jTable_proveedor.getColumnModel().getColumn(8).setPreferredWidth(80); // Columna Contacto 
 
     }//GEN-LAST:event_jButton_ProveedorActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton_GmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GmostrarActionPerformed
+        // TODO add your handling code here:
+        try {
+            // 1. Establecer la conexión con la base de datos
+            String SUrl = "jdbc:mysql://localhost:3306/opticagestioncitas"; 
+            String SUser = "root"; 
+            String SPass = ""; 
+            Connection conexion = DriverManager.getConnection(SUrl, SUser, SPass);
+
+            // 2. Preparar la sentencia SELECT para Productos
+            PreparedStatement stmtMostrarProductos = conexion.prepareStatement(
+                "SELECT ID, codigo, nombre_producto, cantidad, marca, color, fecha_Registro, precio_com, precio_ven FROM Productos"); 
+
+            // 3. Ejecutar la sentencia para obtener los datos de Productos
+            ResultSet rsProductos = stmtMostrarProductos.executeQuery();
+
+            // 4. Mostrar los datos en un JTable (o en otro componente visual)
+            // Crear un modelo de tabla
+            DefaultTableModel modeloTabla = new DefaultTableModel();
+            // Agregar las columnas deseadas
+            modeloTabla.addColumn("ID");
+            modeloTabla.addColumn("Código");
+            modeloTabla.addColumn("Nombre Producto");
+            modeloTabla.addColumn("Cantidad");
+            modeloTabla.addColumn("Marca");
+            modeloTabla.addColumn("Color");
+            modeloTabla.addColumn("Fecha Registro");
+            modeloTabla.addColumn("Precio Compra");
+            modeloTabla.addColumn("Precio Venta");
+
+            // Iterar sobre los resultados de Productos
+            while (rsProductos.next()) {
+                Object[] fila = new Object[9]; // 9 columnas
+                fila[0] = rsProductos.getInt("ID");
+                fila[1] = rsProductos.getString("codigo"); 
+                fila[2] = rsProductos.getString("nombre_producto"); // Corregido para usar "nom_producto"
+                fila[3] = rsProductos.getInt("cantidad");
+                fila[4] = rsProductos.getString("marca");
+                fila[5] = rsProductos.getString("color");
+                fila[6] = rsProductos.getString("fecha_Registro"); 
+                fila[7] = rsProductos.getDouble("precio_com");
+                fila[8] = rsProductos.getDouble("precio_ven");
+
+                modeloTabla.addRow(fila);
+            }
+            // Asigna el modelo de tabla al JTable 
+            jTable_MostrarProductos.setModel(modeloTabla); // Corregido: jTable_MostrarProductos
+
+            // Ajustar el tamaño de las columnas automáticamente
+            jTable_MostrarProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+            // Ajustar el tamaño de las columnas automáticamente
+            jTable_MostrarProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+            // Establecer ancho preferido para las demás columnas
+            jTable_MostrarProductos.getColumnModel().getColumn(0).setPreferredWidth(50); // Columna ID
+            jTable_MostrarProductos.getColumnModel().getColumn(1).setPreferredWidth(100); // Columna Código
+            jTable_MostrarProductos.getColumnModel().getColumn(2).setPreferredWidth(150); // Columna Nombre Producto
+            jTable_MostrarProductos.getColumnModel().getColumn(3).setPreferredWidth(70); // Columna Cantidad
+            jTable_MostrarProductos.getColumnModel().getColumn(4).setPreferredWidth(100); // Columna Marca
+            jTable_MostrarProductos.getColumnModel().getColumn(5).setPreferredWidth(80); // Columna Color
+            jTable_MostrarProductos.getColumnModel().getColumn(6).setPreferredWidth(120); // Columna Fecha Registro
+            jTable_MostrarProductos.getColumnModel().getColumn(7).setPreferredWidth(100); // Columna Precio Compra
+            jTable_MostrarProductos.getColumnModel().getColumn(8).setPreferredWidth(100); // Columna Precio Venta
+
+
+
+
+            // 7. Cerrar la conexión y la sentencia
+            stmtMostrarProductos.close();
+            conexion.close();
+
+        } catch (SQLException e) {
+            // Manejar excepciones:  Imprime el error o muestra un mensaje al usuario
+            System.err.println("Error al mostrar los productos: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al mostrar los productos: " + e.getMessage());
+        }  
+    
+    }//GEN-LAST:event_jButton_GmostrarActionPerformed
     // Método para obtener el ID del rol a partir del nombre del rol
     private int getRoleId(String roleName) {
         switch (roleName) {
@@ -5005,10 +5263,11 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JTextField Tele;
     private javax.swing.JTextField emailAddress1;
     private javax.swing.JTextField fname1;
+    private javax.swing.JButton jButton_BusHistoria;
+    private javax.swing.JButton jButton_Gmostrar;
     private javax.swing.JButton jButton_GuardProveedor;
     private javax.swing.JButton jButton_ID;
     private javax.swing.JButton jButton_Id_11;
-    private javax.swing.JButton jButton_Imprimir;
     private javax.swing.JButton jButton_LimpiarBusqueda;
     private javax.swing.JButton jButton_MostrarPacientes;
     private javax.swing.JButton jButton_MostrarUsuarios;
@@ -5060,6 +5319,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -5183,7 +5443,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane10;
@@ -5196,6 +5458,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable_BSC;
     private javax.swing.JTable jTable_EEAG;
+    private javax.swing.JTable jTable_Historias;
+    private javax.swing.JTable jTable_MostrarProductos;
     private javax.swing.JTable jTable_Productos;
     private javax.swing.JTable jTable_buscarpro;
     private javax.swing.JTable jTable_proveedor;
@@ -5203,6 +5467,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea_Obse;
     private javax.swing.JTextArea jTextArea_Obse12;
     private javax.swing.JTextArea jTextArea_Trata13;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField_Ape1;
     private javax.swing.JTextField jTextField_Buscodigo1;
     private javax.swing.JTextField jTextField_Contacto;
